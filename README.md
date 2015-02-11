@@ -21,3 +21,19 @@ Pull requests welcome!
 
 This project is licensed under the GNU GPL v3. See LICENSE for further
 information.
+
+## Deploying to OpinionLab Repository
+
+To upload this to our repository, add this into a file called ~/.m2/settings.xml:
+
+      <servers>
+        <server>
+            <id>heimat</id>
+            <username>${env.AWS_ACCESS_KEY_ID}</username>
+            <password>${env.AWS_SECRET}</password>
+        </server>
+      </servers>
+
+Then run:
+
+    mvn deploy
