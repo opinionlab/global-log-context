@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import static java.lang.String.format;
+
 /**
  * The GlobalContextSocketAppender only exists to ensure a global context is
  * provided to remote servers, regardless of the thread a log message may
@@ -86,6 +88,7 @@ public class GlobalContextSocketAppender extends SocketAppender {
    *
    * @return The fully processed global context property, serialized as JSON.
    */
+  @SuppressWarnings("unchecked")
   public String getGlobalContext() {
     if (globalContext != null) {
       JSONObject o = new JSONObject();
@@ -112,7 +115,7 @@ public class GlobalContextSocketAppender extends SocketAppender {
         Iterator iterator = ((JSONArray) parsed).iterator();
         int i = 0;
         while (iterator.hasNext()) {
-          this.globalContext.put("global[" + i + "]",
+          this.globalContext.put(format("global[%d]", i),
               String.valueOf(iterator.next()));
           i++;
         }
